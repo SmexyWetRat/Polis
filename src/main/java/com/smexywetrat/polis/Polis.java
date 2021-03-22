@@ -59,7 +59,7 @@ public class Polis {
     		
     		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
     		
-            serverWorld.getChunkSource().generator.getSettings().field_236193_d_ = tempMap;
+            serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
 		}
 	}
 	

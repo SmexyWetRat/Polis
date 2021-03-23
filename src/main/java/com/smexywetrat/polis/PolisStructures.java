@@ -42,6 +42,8 @@ public class PolisStructures {
 //		Polis.register(event.getRegistry(), CITY, "city");
 		registerStructure(INTERSECTION, new StructureSeparationSettings(15, 7, 70031124), true);
 //		registerStructure(CITY, new StructureSeparationSettings(60, 40, 42113007), false);
+		
+		PolisStructures.registerAllPieces();
 	}
 	
 	public static <F extends Structure<?>> void registerStructure(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

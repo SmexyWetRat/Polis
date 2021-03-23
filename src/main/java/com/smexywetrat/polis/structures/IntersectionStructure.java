@@ -21,8 +21,6 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 public class IntersectionStructure extends Structure<NoFeatureConfig>{
 	public IntersectionStructure(Codec<NoFeatureConfig> codec) {
 		super(codec);
-		
-		Polis.LOGGER.log(Level.DEBUG, "Hewwo? I been called.");
 	}
 	
 	@Override

@@ -3,12 +3,14 @@ package com.smexywetrat.polis;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
@@ -40,12 +42,14 @@ public class Polis {
 	}
 	
 	public void onRegisterStructures(final RegistryEvent.Register<Structure<?>> event) {
-//		PolisStructures.registerStructures(event);
-//		PolisConfiguredStructures.registerConfiguredStructures();
+		LOGGER.log(Level.DEBUG, "On register called");
+		
+		PolisStructures.registerStructures(event);
+		PolisConfiguredStructures.registerConfiguredStructures();
 	}
 	
 	public void biomeModification(final BiomeLoadingEvent event) {
-		
+		event.getGeneration().getStructures().add(() -> PolisConfiguredStructures.CONFIGURED_INTERSECTION);
 	}
 	
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
@@ -58,6 +62,7 @@ public class Polis {
     		}
     		
     		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
+    		tempMap.put(PolisStructures.INTERSECTION, DimensionStructuresSettings.DEFAULTS.get(PolisStructures.INTERSECTION));
     		
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
 		}

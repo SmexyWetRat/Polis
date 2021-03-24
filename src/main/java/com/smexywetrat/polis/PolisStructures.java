@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Level;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.smexywetrat.polis.structures.AbstractCityManager;
+import com.smexywetrat.polis.structures.CityStructure;
 //import com.smexywetrat.polis.structures.AbstractCityManager;
 //import com.smexywetrat.polis.structures.CityStructure;
 import com.smexywetrat.polis.structures.IntersectionStructure;
@@ -25,23 +27,21 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class PolisStructures {
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,  Polis.MODID);
+//	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,  Polis.MODID);
 	
 //	public static Feature<NoFeatureConfig> ROAD_FEATURE = new RoadFeature(NoFeatureConfig.CODEC);
 //	public static final RegistryObject<Feature<NoFeatureConfig>> ROADFEATUREREGISTRY = createFeature("road_feature",() -> ROAD_FEATURE);
 	
 	public static Structure<NoFeatureConfig> INTERSECTION /*junction?*/ = new IntersectionStructure(NoFeatureConfig.CODEC);
-//	public static Structure<NoFeatureConfig> CITY = new CityStructure(NoFeatureConfig.CODEC);
+	public static Structure<NoFeatureConfig> CITY = new CityStructure(NoFeatureConfig.CODEC);
 	public static IStructurePieceType INTERSECTION_PIECE = IntersectionStructurePiece.Piece::new;
-//	public static IStructurePieceType CITY_PIECE = AbstractCityManager.Piece::new;
+	public static IStructurePieceType CITY_PIECE = AbstractCityManager.Piece::new;
 	
 	public static void registerStructures(Register<Structure<?>> event) {
-		Polis.LOGGER.log(Level.DEBUG, "register structures called");
-		
 		Polis.register(event.getRegistry(), INTERSECTION, "intersection");
-//		Polis.register(event.getRegistry(), CITY, "city");
+		Polis.register(event.getRegistry(), CITY, "city");
 		registerStructure(INTERSECTION, new StructureSeparationSettings(15, 7, 70031124), true);
-//		registerStructure(CITY, new StructureSeparationSettings(60, 40, 42113007), false);
+		registerStructure(CITY, new StructureSeparationSettings(60, 40, 42113007), false);
 		
 		PolisStructures.registerAllPieces();
 	}
@@ -64,17 +64,15 @@ public class PolisStructures {
 	}
 	
 	public static void registerAllPieces() {
-		Polis.LOGGER.log(Level.DEBUG, "register pieces called");
-		
 		registerStructurePiece(INTERSECTION_PIECE, new ResourceLocation(Polis.MODID, "intersection_piece"));
-//		registerStructurePiece(INTERSECTION_PIECE, new ResourceLocation(Polis.MODID, "city_piece"));
+		registerStructurePiece(CITY_PIECE, new ResourceLocation(Polis.MODID, "city_piece"));
 	}
 	
 	static void registerStructurePiece(IStructurePieceType structurePiece, ResourceLocation rl) {
 		Registry.register(Registry.STRUCTURE_PIECE,  rl,  structurePiece);
 	}
 	
-	private static <F extends Feature<?>> RegistryObject<F> createFeature(String name, Supplier<F> feature) {
-		return FEATURES.register(name, feature);
-	}
+//	private static <F extends Feature<?>> RegistryObject<F> createFeature(String name, Supplier<F> feature) {
+//		return FEATURES.register(name, feature);
+//	}
 }

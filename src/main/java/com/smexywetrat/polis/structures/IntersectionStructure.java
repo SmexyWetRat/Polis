@@ -28,10 +28,10 @@ public class IntersectionStructure extends Structure<NoFeatureConfig>{
 		return IntersectionStructure.Start::new;
 	}
 	
-//	@Override
-//	public GenerationStage.Decoration getDecorationStage() {
-//		return GenerationStage.Decoration.UNDERGROUND_STRUCTURES;
-//	}
+	@Override
+	public GenerationStage.Decoration step() {
+		return GenerationStage.Decoration.UNDERGROUND_STRUCTURES;
+	}
 	
 	public static class Start extends StructureStart<NoFeatureConfig> {
 		

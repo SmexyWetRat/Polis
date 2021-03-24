@@ -42,14 +42,13 @@ public class Polis {
 	}
 	
 	public void onRegisterStructures(final RegistryEvent.Register<Structure<?>> event) {
-		LOGGER.log(Level.DEBUG, "On register called");
-		
 		PolisStructures.registerStructures(event);
 		PolisConfiguredStructures.registerConfiguredStructures();
 	}
 	
 	public void biomeModification(final BiomeLoadingEvent event) {
 		event.getGeneration().getStructures().add(() -> PolisConfiguredStructures.CONFIGURED_INTERSECTION);
+		event.getGeneration().getStructures().add(() -> PolisConfiguredStructures.CONFIGURED_CITY);
 	}
 	
 	public void addDimensionalSpacing(final WorldEvent.Load event) {
@@ -63,7 +62,7 @@ public class Polis {
     		
     		Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
     		tempMap.put(PolisStructures.INTERSECTION, DimensionStructuresSettings.DEFAULTS.get(PolisStructures.INTERSECTION));
-    		
+    		tempMap.put(PolisStructures.CITY, DimensionStructuresSettings.DEFAULTS.get(PolisStructures.CITY));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
 		}
 	}

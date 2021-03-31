@@ -46,7 +46,7 @@ public class IntersectionStructurePiece {
 		public Piece(TemplateManager templateManagerIn, CompoundNBT tagCompound) {
 			super(PolisStructures.INTERSECTION_PIECE, tagCompound);
 			this.resourceLocation = new ResourceLocation(tagCompound.getString("Template"));
-			this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
+			this.rotation = Rotation.NONE;//Rotation.valueOf(tagCompound.getString("Rot"));
 			this.setupPiece(templateManagerIn);
 		}
 		
